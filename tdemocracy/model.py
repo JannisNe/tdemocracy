@@ -1,0 +1,57 @@
+from collections.abc import Sequence
+from typing import Annotated
+
+from pydantic import BaseModel, Field
+
+
+class PhotometricPoint(BaseModel):
+    """Observed photometric point in an LSST alert report"""
+
+    time: Annotated[float, Field(description="epoch of observation")]
+    flux: Annotated[float, Field(description="observed flux")]
+    fluxerr: Annotated[float, Field(description="flux uncertainty")]
+    band: Annotated[str, Field(description="photometric band")]
+    zp: Annotated[float, Field(description="zero point")]
+    zpsys: Annotated[str, Field(description="zero point system")]
+
+
+class Object(BaseModel):
+    """Object associated with an LSST alert report (diaObject)"""
+
+    id: Annotated[int, Field(description="diaObjectId")]
+    external_id: Annotated[str | None, Field(description="External Object ID")] = None
+    ra: Annotated[float, Field(description="right ascension (deg)")]
+    ra_err: Annotated[
+        float | None, Field(description="right ascension uncertainty (deg)")
+    ] = None
+    dec: Annotated[float, Field(description="declination")]
+    dec_err: Annotated[float | None, Field(description="declination uncertainty")] = (
+        None
+    )
+    ra_dec_cov: Annotated[
+        float | None, Field(description="right ascension/declination covariance")
+    ] = None
+    source: Annotated[str, Field(description="data source")]
+
+
+class Host(BaseModel):
+    name: str | None
+    source: str | list[str]
+    redshift: float | None
+    redshift_error: float | None = None
+    distance: float
+    info: str | dict[str, dict[str, str]] | None = None
+
+
+class LSSTReport(BaseModel):
+    """
+    Data model for LSST alert reports from Ampel.
+    """
+
+    object: Object
+    state: Annotated[
+        int,
+        Field(description="unique identifier for underlying collection of data points"),
+    ]
+    photometry: Sequence[PhotometricPoint]
+    host: list[Host] = []
