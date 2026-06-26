@@ -1,48 +1,46 @@
-[tool.poetry]
+[project]
 name = "tdemocracy"
 version = "0.0.1"
 description = "Listen to nuclear alerts from the Vera Rubin Observatory for the TDEmocracy project"
-authors = ["Jannis Necker <necker@strw.leidenuniv.nl>"]
-repository = "https://github.com/JannisNe/tdemocracy"
-documentation = "https://JannisNe.github.io/tdemocracy/"
 readme = "README.md"
-packages = [
-  {include = "tdemocracy"}
+requires-python = ">=3.10,<4.0"
+authors = [
+    { name = "Jannis Necker", email = "necker@strw.leidenuniv.nl" },
+]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/JannisNe/tdemocracy"
+Documentation = "https://JannisNe.github.io/tdemocracy/"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.2",
+    "pytest-cov>=4.0",
+    "mypy>=1.5.1",
+    "pre-commit>=3.4.0",
+    "tox>=4.11.1",
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.8,<4.0"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.2.0"
-pytest-cov = "^4.0.0"
-mypy = "^1.5.1"
-pre-commit = "^3.4.0"
-tox = "^4.11.1"
-
-
-
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
 files = ["tdemocracy"]
-disallow_untyped_defs = "True"
-disallow_any_unimported = "True"
-no_implicit_optional = "True"
-check_untyped_defs = "True"
-warn_return_any = "True"
-warn_unused_ignores = "True"
-show_error_codes = "True"
-
-
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py313"
 line-length = 120
 fix = true
 select = [
@@ -65,7 +63,8 @@ select = [
     # mccabe
     "C90",
     # pycodestyle
-    "E", "W",
+    "E",
+    "W",
     # pyflakes
     "F",
     # pygrep-hooks
