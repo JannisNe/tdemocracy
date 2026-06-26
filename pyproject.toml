@@ -3,11 +3,15 @@ name = "tdemocracy"
 version = "0.0.1"
 description = "Listen to nuclear alerts from the Vera Rubin Observatory for the TDEmocracy project"
 readme = "README.md"
-requires-python = ">=3.10,<4.0"
+requires-python = ">=3.11,<4.0"
 authors = [
     { name = "Jannis Necker", email = "necker@strw.leidenuniv.nl" },
 ]
-dependencies = []
+dependencies = [
+    "hop-client (>=0.12.1,<0.13.0)",
+    "py-avro-schema (>=3.8.2,<4.0.0)",
+    "pydantic (>=2.13.4,<3.0.0)",
+]
 
 [project.urls]
 Repository = "https://github.com/JannisNe/tdemocracy"
@@ -20,6 +24,13 @@ dev = [
     "mypy>=1.5.1",
     "pre-commit>=3.4.0",
     "tox>=4.11.1",
+]
+ampel = [
+    "ampel-photometry (>=0.10.1,<0.11.0)",
+    "ampel-alerts (>=0.10.3,<0.11.0)",
+    "ampel-lsst (>=0.10.1a17,<0.11.0)",
+    "ampel-interface (>=0.10.4.post2,<0.11.0)",
+    "ampel-core (>=0.10.4.post0,<0.11.0)",
 ]
 
 [build-system]
