@@ -44,7 +44,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Run tests
-        with:
+        env:
           TDEMOCRACY_USERNAME: ${{ secrets.TDEMOCRACY_USERNAME }}
           TDEMOCRACY_PASSWORD: ${{ secrets.TDEMOCRACY_PASSWORD }}
         run: poetry run pytest tests --cov --cov-config=pyproject.toml --cov-report=xml
