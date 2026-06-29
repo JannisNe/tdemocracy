@@ -1,7 +1,7 @@
 from collections.abc import Sequence
 from typing import Annotated
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class PhotometricPoint(BaseModel):
@@ -21,16 +21,10 @@ class Object(BaseModel):
     id: Annotated[int, Field(description="diaObjectId")]
     external_id: Annotated[str | None, Field(description="External Object ID")] = None
     ra: Annotated[float, Field(description="right ascension (deg)")]
-    ra_err: Annotated[
-        float | None, Field(description="right ascension uncertainty (deg)")
-    ] = None
+    ra_err: Annotated[float | None, Field(description="right ascension uncertainty (deg)")] = None
     dec: Annotated[float, Field(description="declination")]
-    dec_err: Annotated[float | None, Field(description="declination uncertainty")] = (
-        None
-    )
-    ra_dec_cov: Annotated[
-        float | None, Field(description="right ascension/declination covariance")
-    ] = None
+    dec_err: Annotated[float | None, Field(description="declination uncertainty")] = None
+    ra_dec_cov: Annotated[float | None, Field(description="right ascension/declination covariance")] = None
     source: Annotated[str, Field(description="data source")]
 
 
@@ -41,6 +35,13 @@ class Host(BaseModel):
     redshift_error: float | None = None
     distance: float
     info: str | dict[str, dict[str, str]] | None = None
+
+
+class Feature(BaseModel):
+    name: str
+    version: str
+    info: str | None = None
+    features: dict[str, float]
 
 
 class LSSTReport(BaseModel):
@@ -55,3 +56,7 @@ class LSSTReport(BaseModel):
     ]
     photometry: Sequence[PhotometricPoint]
     host: list[Host] = []
+    classification: list = []
+    features: list[Feature] = []
+
+    model_config = ConfigDict(extra="forbid")
