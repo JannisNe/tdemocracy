@@ -11,6 +11,8 @@ dependencies = [
     "hop-client (>=0.12.1,<0.13.0)",
     "py-avro-schema (>=3.8.2,<4.0.0)",
     "pydantic (>=2.13.4,<3.0.0)",
+    "pydantic-settings (>=2.14.2,<3.0.0)",
+
 ]
 
 [project.urls]
@@ -23,7 +25,7 @@ dev = [
     "pytest-cov>=4.0",
     "mypy>=1.5.1",
     "pre-commit>=3.4.0",
-    "tox>=4.11.1",
+    "types-pyyaml (>=6.0.12.20260518,<7.0.0.0)",
 ]
 
 [build-system]
@@ -39,6 +41,14 @@ check_untyped_defs = true
 warn_return_any = true
 warn_unused_ignores = true
 show_error_codes = true
+plugins = [
+  "pydantic.mypy"
+]
+[[tool.mypy.overrides]]
+module = [
+    "hop.*",
+]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
