@@ -1,0 +1,27 @@
+<map id="Entity Relationship Diagram created by erdantic" name="Entity Relationship Diagram created by erdantic">
+<area shape="rect" id="node1" title="tdemocracy.model.Host
+
+Host identified through catalog matching
+" alt="" coords="511,549,863,745"/>
+<area shape="rect" id="node2" title="tdemocracy.model.LSSTReport
+
+Data model for LSST alert reports from Ampel.
+" alt="" coords="5,436,367,632"/>
+<area shape="rect" id="node3" title="tdemocracy.model.MeanPosition
+
+Mean position of the transient calculated from as the weighted sum of the diaSource positions contributing to the diaSource.
+" alt="" coords="600,793,773,933"/>
+<area shape="rect" id="node4" title="tdemocracy.model.Object
+
+Object associated with an LSST alert report (diaObject)
+" alt="" coords="593,5,780,257"/>
+<area shape="rect" id="node5" title="tdemocracy.model.PhotometricPoint
+
+Observed photometric point in an LSST alert report.
+Forced photometry (diaForcedSource) takes preference over alert photometry (diaSource.
+" alt="" coords="614,305,759,501"/>
+<area shape="rect" id="node6" title="tdemocracy.model.TemplateFlux
+
+Median of the templateFlux of all diaSources contributing to the diaObject.
+" alt="" coords="600,981,773,1121"/>
+</map>

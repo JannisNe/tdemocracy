@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tdemocracy.model &mdash; tdemocracy</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/autodoc_pydantic.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            tdemocracy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../listen.html">Listening to the Kafka stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Data Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settings.html">Settings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tdemocracy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tdemocracy.model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tdemocracy.model</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ConfigDict</span>
+
+
+<div class="viewcode-block" id="PhotometricPoint">
+<a class="viewcode-back" href="../../model.html#tdemocracy.model.PhotometricPoint">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PhotometricPoint</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Observed photometric point in an LSST alert report.</span>
+<span class="sd">    Forced photometry (diaForcedSource) takes preference over alert photometry (diaSource.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">time</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;midpointMjdTai&quot;&quot;&quot;</span>
+    <span class="n">flux</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;psfFlux&quot;&quot;&quot;</span>
+    <span class="n">fluxerr</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;psfFluxErr&quot;&quot;&quot;</span>
+    <span class="n">band</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;band&quot;&quot;&quot;</span>
+    <span class="n">zp</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Photometric zero point&quot;&quot;&quot;</span>
+    <span class="n">zpsys</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Zero point system&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Object">
+<a class="viewcode-back" href="../../model.html#tdemocracy.model.Object">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Object</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Object associated with an LSST alert report (diaObject)&quot;&quot;&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;diaObjectId&quot;&quot;&quot;</span>
+    <span class="n">external_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;External Object ID&quot;&quot;&quot;</span>
+    <span class="n">ra</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Right ascension (ra; deg)&quot;&quot;&quot;</span>
+    <span class="n">ra_err</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Right ascension uncertainty (raErr; deg)&quot;&quot;&quot;</span>
+    <span class="n">dec</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Declination (dec; deg)&quot;&quot;&quot;</span>
+    <span class="n">dec_err</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Declination uncertainty (decErr; deg)&quot;&quot;&quot;</span>
+    <span class="n">ra_dec_cov</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Right ascension/declination covariance (ra_dec_Doc; deg2)&quot;&quot;&quot;</span>
+    <span class="n">source</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data source&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Host">
+<a class="viewcode-back" href="../../model.html#tdemocracy.model.Host">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Host</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Host identified through catalog matching&quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Name of the identifying ampel unit&quot;&quot;&quot;</span>
+    <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Names of the catalogs containing this host&quot;&quot;&quot;</span>
+    <span class="n">redshift</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mean of the best redshift category for all catalog sources containing redshifts (see https://github.com/AmpelAstro/Ampel-HU-astro/blob/main/ampel/contrib/hu/t2/T2DigestRedshifts.py)&quot;&quot;&quot;</span>
+    <span class="n">redshift_error</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Precision of the redshift category&quot;&quot;&quot;</span>
+    <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Distance&quot;&quot;&quot;</span>
+    <span class="n">info</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Type info if included in the matching catalogs, catalog name -&gt; type key -&gt; type value&quot;&quot;&quot;</span></div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Feature</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature name&quot;&quot;&quot;</span>
+    <span class="n">version</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature version&quot;&quot;&quot;</span>
+    <span class="n">info</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Description of the feature&quot;&quot;&quot;</span>
+    <span class="n">features</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Feature values&quot;&quot;&quot;</span>
+
+
+<span class="n">mean_position_doc</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;Mean position of the transient calculated from as the &quot;</span>
+    <span class="s2">&quot;weighted sum of the diaSource positions contributing to the diaSource.&quot;</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="MeanPosition">
+<a class="viewcode-back" href="../../model.html#tdemocracy.model.MeanPosition">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MeanPosition</span><span class="p">(</span><span class="n">Feature</span><span class="p">):</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">mean_position_doc</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mean_position&quot;</span>
+    <span class="n">info</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">mean_position_doc</span></div>
+
+
+
+<span class="n">template_flux_doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Median of the templateFlux of all diaSources contributing to the diaObject.&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="TemplateFlux">
+<a class="viewcode-back" href="../../model.html#tdemocracy.model.TemplateFlux">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TemplateFlux</span><span class="p">(</span><span class="n">Feature</span><span class="p">):</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">template_flux_doc</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;template_flux&quot;</span>
+    <span class="n">info</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">template_flux_doc</span></div>
+
+
+
+<div class="viewcode-block" id="LSSTReport">
+<a class="viewcode-back" href="../../model.html#tdemocracy.model.LSSTReport">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LSSTReport</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Data model for LSST alert reports from Ampel.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">object</span><span class="p">:</span> <span class="n">Object</span>
+    <span class="n">state</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;unique identifier for underlying collection of data points in AMPEL&quot;&quot;&quot;</span>
+    <span class="n">photometry</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">PhotometricPoint</span><span class="p">]</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Host</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">classification</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">features</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">MeanPosition</span> <span class="o">|</span> <span class="n">TemplateFlux</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">extra</span><span class="o">=</span><span class="s2">&quot;forbid&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
