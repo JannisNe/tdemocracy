@@ -3,6 +3,7 @@
 [![codecov](https://codecov.io/gh/JannisNe/tdemocracy/branch/main/graph/badge.svg)](https://codecov.io/gh/JannisNe/tdemocracy)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/JannisNe/tdemocracy)](https://img.shields.io/github/commit-activity/m/JannisNe/tdemocracy)
 [![License](https://img.shields.io/github/license/JannisNe/tdemocracy)](https://img.shields.io/github/license/JannisNe/tdemocracy)
+[![Deploy Docs](https://github.com/JannisNe/tdemocracy/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/JannisNe/tdemocracy/actions/workflows/deploy-docs.yml)
 
 # Listen to TDEmocracy!
 
