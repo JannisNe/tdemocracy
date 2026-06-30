@@ -19,6 +19,9 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v2
+
       - name: Install docs dependencies
         run: poetry install -E docs
 
