@@ -35,5 +35,5 @@ def listen_to_nuclear_stream(
     with stream.open(f"kafka://kafka.scimma.org/{_settings.topic}", mode="r", group_id=_settings.group_id) as s:
         LOGGER.info(f"Listening to {_settings.topic}...")
         for message in s:
-            LOGGER.debug(f"Received message: {message.value}")
+            LOGGER.debug("Received message")
             yield LSSTReport.model_validate(message.content)
