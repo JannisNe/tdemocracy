@@ -13,15 +13,18 @@ You need an account at the `SCIMMA Hopskotch service`_. Please contact the TDEmo
 Installation
 ------------
 
-Pull the repository and install the dependencies with `poetry`_::
-
+Clone the repository::
 
 
    git clone https://github.com/JannisNe/tdemocracy.git
+
+Create a new python environment with your favourite environment manager (``python >=3.11``). You can then install the package and all dependencies using `poetry`_::
+
    cd tdemocracy
    poetry install
 
 .. _poetry: https://python-poetry.org/
+
 
 In the future, you will be able to install the package via ``pip``::
 
