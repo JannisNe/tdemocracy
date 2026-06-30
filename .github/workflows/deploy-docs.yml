@@ -20,7 +20,7 @@ jobs:
           python-version: "3.13"
 
       - name: Install docs dependencies
-        run: poetry install --with docs
+        run: poetry install -E docs
 
       - name: Build documentation
         run: make docs
