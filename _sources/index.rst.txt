@@ -28,17 +28,13 @@ In the future, you will be able to install the package via ``pip``::
    pip install tdemocracy
 
 
-Usage
------
+Getting started
+---------------
 
-
-********
-CONTENTS
-********
 
 .. toctree::
-   selection
    listen
+   selection
    model
    settings
    :maxdepth: 1
