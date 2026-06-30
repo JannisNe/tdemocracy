@@ -18,7 +18,7 @@ Object associated with an LSST alert report (diaObject)
 <area shape="rect" id="node5" title="tdemocracy.model.PhotometricPoint
 
 Observed photometric point in an LSST alert report.
-Forced photometry (diaForcedSource) takes preference over alert photometry (diaSource.
+Forced photometry (diaForcedSource) takes preference over alert photometry (diaSource).
 " alt="" coords="614,305,759,501"/>
 <area shape="rect" id="node6" title="tdemocracy.model.TemplateFlux
 
