@@ -37,6 +37,7 @@ CONTENTS
 ********
 
 .. toctree::
+    selection
    listen
    model
    settings
