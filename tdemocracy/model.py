@@ -6,7 +6,7 @@ from pydantic import BaseModel, ConfigDict
 class PhotometricPoint(BaseModel):
     """
     Observed photometric point in an LSST alert report.
-    Forced photometry (diaForcedSource) takes preference over alert photometry (diaSource.
+    Forced photometry (diaForcedSource) takes preference over alert photometry (diaSource).
     """
 
     time: float
