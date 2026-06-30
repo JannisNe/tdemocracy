@@ -17,6 +17,17 @@ def listen_to_nuclear_stream(
     until_eos: bool = False,
     settings: Settings | None = None,
 ) -> Generator[LSSTReport]:
+    """
+    Listen to Nuclear stream
+
+    :param start_at: where to start the stream, either of StartPosition.EARLIEST or StartPosition.LATEST
+    :type start_at: Any
+    :param until_eos: Stop loop when the end of the stream is reached or wait for next message (default)
+    :type until_eos: bool
+    :param settings: Settings to use, if not passed reads the corresponding from the environment or a `.env` file. See :class:`tdemocracy.settings.Settings` for details.
+    :type settings: Settings | None
+
+    """
     _settings = settings or Settings()
     auth = Auth(_settings.username, _settings.password)
     stream = Stream(auth=auth, start_at=start_at, until_eos=until_eos)

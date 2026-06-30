@@ -1,7 +1,6 @@
 from collections.abc import Sequence
-from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict
 
 
 class PhotometricPoint(BaseModel):
@@ -10,69 +9,88 @@ class PhotometricPoint(BaseModel):
     Forced photometry (diaForcedSource) takes preference over alert photometry (diaSource.
     """
 
-    time: Annotated[float, Field(description="midpointMjdTai")]
-    flux: Annotated[float, Field(description="psfFlux")]
-    fluxerr: Annotated[float, Field(description="psfFluxErr")]
-    band: Annotated[str, Field(description="band")]
-    zp: Annotated[float, Field(description="Photometric zero point")]
-    zpsys: Annotated[str, Field(description="Zero point system")]
+    time: float
+    """midpointMjdTai"""
+    flux: float
+    """psfFlux"""
+    fluxerr: float
+    """psfFluxErr"""
+    band: str
+    """band"""
+    zp: float
+    """Photometric zero point"""
+    zpsys: str
+    """Zero point system"""
 
 
 class Object(BaseModel):
     """Object associated with an LSST alert report (diaObject)"""
 
-    id: Annotated[int, Field(description="diaObjectId")]
-    external_id: Annotated[str | None, Field(description="External Object ID")] = None
-    ra: Annotated[float, Field(description="Right ascension (ra; deg)")]
-    ra_err: Annotated[float | None, Field(description="Right ascension uncertainty (raErr; deg)")] = None
-    dec: Annotated[float, Field(description="Declination (dec; deg)")]
-    dec_err: Annotated[float | None, Field(description="Declination uncertainty (decErr; deg)")] = None
-    ra_dec_cov: Annotated[
-        float | None, Field(description="Right ascension/declination covariance (ra_dec_Doc; deg2")
-    ] = None
-    source: Annotated[str, Field(description="Data source")]
+    id: int
+    """diaObjectId"""
+    external_id: str | None = None
+    """External Object ID"""
+    ra: float
+    """Right ascension (ra; deg)"""
+    ra_err: float | None = None
+    """Right ascension uncertainty (raErr; deg)"""
+    dec: float
+    """Declination (dec; deg)"""
+    dec_err: float | None = None
+    """Declination uncertainty (decErr; deg)"""
+    ra_dec_cov: float | None = None
+    """Right ascension/declination covariance (ra_dec_Doc; deg2)"""
+    source: str
+    """Data source"""
 
 
 class Host(BaseModel):
-    """Host identified though catalog matching"""
+    """Host identified through catalog matching"""
 
-    name: Annotated[str | None, Field(description="Name of the identifying ampel unit")]
-    source: Annotated[str | list[str], Field(description="Names of the catalogs containing this host")]
-    redshift: Annotated[
-        float | None,
-        Field(
-            description=(
-                "Mean of the best redshift category for all catalog sources containing redshifts (see "
-                "https://github.com/AmpelAstro/Ampel-HU-astro/blob/main/ampel/contrib/hu/t2/T2DigestRedshifts.py"
-            )
-        ),
-    ]
-    redshift_error: Annotated[float | None, Field(description="Precision of the redshift category")] = None
+    name: str | None
+    """Name of the identifying ampel unit"""
+    source: str | list[str]
+    """Names of the catalogs containing this host"""
+    redshift: float | None
+    """Mean of the best redshift category for all catalog sources containing redshifts (see https://github.com/AmpelAstro/Ampel-HU-astro/blob/main/ampel/contrib/hu/t2/T2DigestRedshifts.py)"""
+    redshift_error: float | None = None
+    """Precision of the redshift category"""
     distance: float
-    info: Annotated[
-        str | dict[str, dict[str, str]] | None,
-        Field(description="Type info if included in the matchjing catalogs, catalog name -> type key -> type value"),
-    ] = None
+    """Distance"""
+    info: str | dict[str, dict[str, str]] | None = None
+    """Type info if included in the matching catalogs, catalog name -> type key -> type value"""
 
 
 class Feature(BaseModel):
-    name: Annotated[str, Field(description="Feature name")]
-    version: Annotated[str, Field(description="Feature version")]
-    info: Annotated[str | None, Field(description="Description of the feature")]
-    features: Annotated[dict[str, float], Field(description="Feature values")]
+    name: str
+    """Feature name"""
+    version: str
+    """Feature version"""
+    info: str | None
+    """Description of the feature"""
+    features: dict[str, float]
+    """Feature values"""
+
+
+mean_position_doc = (
+    "Mean position of the transient calculated from as the "
+    "weighted sum of the diaSource positions contributing to the diaSource."
+)
 
 
 class MeanPosition(Feature):
+    __doc__ = mean_position_doc
     name: str = "mean_position"
-    info: str = (
-        "Mean position of the transient calculated from as "
-        "the weighted sum of the diaSource positions contributing to the diaSource."
-    )
+    info: str = mean_position_doc
+
+
+template_flux_doc = """Median of the templateFlux of all diaSources contributing to the diaObject."""
 
 
 class TemplateFlux(Feature):
+    __doc__ = template_flux_doc
     name: str = "template_flux"
-    info: str = "Median of the templateFlux of all diaSources contributing to the diaObject."
+    info: str = template_flux_doc
 
 
 class LSSTReport(BaseModel):
@@ -81,10 +99,8 @@ class LSSTReport(BaseModel):
     """
 
     object: Object
-    state: Annotated[
-        int,
-        Field(description="unique identifier for underlying collection of data points in AMPEL"),
-    ]
+    state: int
+    """unique identifier for underlying collection of data points in AMPEL"""
     photometry: Sequence[PhotometricPoint]
     host: list[Host] = []
     classification: list = []
