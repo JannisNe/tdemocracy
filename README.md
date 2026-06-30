@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/JannisNe/tdemocracy/branch/main/graph/badge.svg)](https://codecov.io/gh/JannisNe/tdemocracy)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/JannisNe/tdemocracy)](https://img.shields.io/github/commit-activity/m/JannisNe/tdemocracy)
 [![License](https://img.shields.io/github/license/JannisNe/tdemocracy)](https://img.shields.io/github/license/JannisNe/tdemocracy)
-[![Deploy Docs](https://github.com/JannisNe/tdemocracy/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/JannisNe/tdemocracy/actions/workflows/deploy-docs.yml)
+[![Deploy Docs](https://github.com/JannisNe/tdemocracy/actions/workflows/deploy-docs.yml/badge.svg)](https://jannisne.github.io/tdemocracy)
 
 # Listen to TDEmocracy!
 
@@ -39,7 +39,7 @@ for report in listen_to_nuclear_stream():
     ...
 ```
 
-The report is an instance of `tdemocracy.model.LSSTReport`. There you can find more documentation on the contents.
+Find more detailed documentation [here](https://jannisne.github.io/tdemocracy).
 
 ---
 
