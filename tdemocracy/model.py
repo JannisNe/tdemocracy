@@ -1,4 +1,5 @@
 from collections.abc import Sequence
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
 
@@ -9,6 +10,10 @@ class PhotometricPoint(BaseModel):
     Forced photometry (diaForcedSource) takes preference over alert photometry (diaSource).
     """
 
+    id: int
+    """diaSourceId or diaForcedSourceId"""
+    source: Literal["LSST_DP", "LSST_FP"]
+    """id source"""
     time: float
     """midpointMjdTai"""
     flux: float
