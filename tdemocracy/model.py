@@ -1,5 +1,5 @@
 from collections.abc import Sequence
-from typing import Literal
+from typing import Literal, TypedDict
 
 from pydantic import BaseModel, ConfigDict
 
@@ -99,11 +99,15 @@ class TemplateFlux(BaseModel):
     """95th percentile template flux"""
 
 
-class TemplateFluxes(BaseModel):
+class TemplateFluxes(TypedDict):
     """Median of the templateFlux of all diaSources contributing to the diaObject."""
 
-    template_fluxes: dict[str, list[TemplateFlux]]
-    """Mapping of band names to template fluxes."""
+    u: TemplateFlux | None
+    g: TemplateFlux | None
+    r: TemplateFlux | None
+    i: TemplateFlux | None
+    z: TemplateFlux | None
+    y: TemplateFlux | None
 
 
 class NuclearTransientReport(BaseModel):
