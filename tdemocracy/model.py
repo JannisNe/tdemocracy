@@ -66,36 +66,44 @@ class Host(BaseModel):
     """Type info if included in the matching catalogs, catalog name -> type key -> type value"""
 
 
-class Feature(BaseModel):
-    name: str
-    """Feature name"""
-    version: str
-    """Feature version"""
-    info: str | None
-    """Description of the feature"""
-    features: dict[str, float]
-    """Feature values"""
+class MeanPosition(BaseModel):
+    """
+    Mean position of the transient calculated as the
+    weighted sum of the diaSource positions contributing to the diaSource.
+    """
 
-
-mean_position_doc = (
-    "Mean position of the transient calculated from as the "
-    "weighted sum of the diaSource positions contributing to the diaSource."
-)
-
-
-class MeanPosition(Feature):
-    __doc__ = mean_position_doc
-    name: str = "mean_position"
-    info: str = mean_position_doc
+    mean_ra: float
+    """The mean RA (deg)"""
+    mean_dec: float
+    """The mean Dec (deg)"""
+    circularized_error: float
+    """Geometric mean of sqrt(raErr^2 + decErr^2)"""
+    std: float
+    """Standard deviation of the datapoint distance to the mean position"""
 
 
 template_flux_doc = """Median of the templateFlux of all diaSources contributing to the diaObject."""
 
 
-class TemplateFlux(Feature):
-    __doc__ = template_flux_doc
-    name: str = "template_flux"
-    info: str = template_flux_doc
+class TemplateFlux(BaseModel):
+    """Median and 90th percentile of the templateFlux of all diaSources
+    contributing to the diaObject in a single band."""
+
+    band: str
+    """Band name"""
+    median: float
+    """Median template flux"""
+    perc5: float
+    """5th percentile template flux"""
+    perc95: float
+    """95th percentile template flux"""
+
+
+class TemplateFluxes(BaseModel):
+    """Median of the templateFlux of all diaSources contributing to the diaObject."""
+
+    template_fluxes: dict[str, list[TemplateFlux]]
+    """Mapping of band names to template fluxes."""
 
 
 class NuclearTransientReport(BaseModel):
@@ -103,12 +111,14 @@ class NuclearTransientReport(BaseModel):
     Data model for LSST alert reports from Ampel.
     """
 
+    version: str
+    """Version of the TDEmocracy nuclear filter"""
     object: Object
     state: int
     """unique identifier for underlying collection of data points in AMPEL"""
     photometry: Sequence[PhotometricPoint]
     host: list[Host] = []
-    classification: list = []
-    features: list[MeanPosition | TemplateFlux] = []
+    mean_position: MeanPosition
+    template_fluxes: TemplateFluxes
 
     model_config = ConfigDict(extra="forbid")
