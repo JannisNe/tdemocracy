@@ -61,7 +61,7 @@ class Host(BaseModel):
     redshift_error: float | None = None
     """Precision of the redshift category"""
     distance: float
-    """Distance"""
+    """Distance in arcsec"""
     info: str | dict[str, dict[str, str]] | None = None
     """Type info if included in the matching catalogs, catalog name -> type key -> type value"""
 
@@ -77,9 +77,9 @@ class MeanPosition(BaseModel):
     mean_dec: float
     """The mean Dec (deg)"""
     circularized_error: float
-    """Geometric mean of sqrt(raErr^2 + decErr^2)"""
+    """Geometric mean of sqrt(raErr^2 + decErr^2) in arcsec"""
     std: float
-    """Standard deviation of the datapoint distance to the mean position"""
+    """Standard deviation of the datapoint distance to the mean position in arcsec"""
 
 
 template_flux_doc = """Median of the templateFlux of all diaSources contributing to the diaObject."""
@@ -121,7 +121,7 @@ class NuclearTransientReport(BaseModel):
     state: int
     """unique identifier for underlying collection of data points in AMPEL"""
     photometry: Sequence[PhotometricPoint]
-    host: Host
+    host: Host | None
     mean_position: MeanPosition
     template_fluxes: TemplateFluxes
 
