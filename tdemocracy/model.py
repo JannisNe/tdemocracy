@@ -82,9 +82,6 @@ class MeanPosition(BaseModel):
     """Standard deviation of the datapoint distance to the mean position in arcsec"""
 
 
-template_flux_doc = """Median of the templateFlux of all diaSources contributing to the diaObject."""
-
-
 class TemplateFlux(TypedDict):
     """Median and 90th percentile of the templateFlux of all diaSources
     contributing to the diaObject in a single band."""
