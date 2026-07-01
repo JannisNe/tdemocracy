@@ -85,7 +85,7 @@ class MeanPosition(BaseModel):
 template_flux_doc = """Median of the templateFlux of all diaSources contributing to the diaObject."""
 
 
-class TemplateFlux(BaseModel):
+class TemplateFlux(TypedDict):
     """Median and 90th percentile of the templateFlux of all diaSources
     contributing to the diaObject in a single band."""
 
@@ -121,7 +121,7 @@ class NuclearTransientReport(BaseModel):
     state: int
     """unique identifier for underlying collection of data points in AMPEL"""
     photometry: Sequence[PhotometricPoint]
-    host: list[Host] = []
+    host: Host
     mean_position: MeanPosition
     template_fluxes: TemplateFluxes
 
