@@ -6,7 +6,7 @@ from hop import Stream
 from hop.auth import Auth
 from hop.io import StartPosition
 
-from tdemocracy.model import LSSTReport
+from tdemocracy.model import NuclearTransientReport
 from tdemocracy.settings import Settings
 
 LOGGER = logging.getLogger(__name__)
@@ -16,7 +16,7 @@ def listen_to_nuclear_stream(
     start_at: Any = StartPosition.EARLIEST,
     until_eos: bool = False,
     settings: Settings | None = None,
-) -> Generator[LSSTReport]:
+) -> Generator[NuclearTransientReport]:
     """
     Listen to Nuclear stream
 
@@ -36,4 +36,4 @@ def listen_to_nuclear_stream(
         LOGGER.info(f"Listening to {_settings.topic}...")
         for message in s:
             LOGGER.debug("Received message")
-            yield LSSTReport.model_validate(message.content)
+            yield NuclearTransientReport.model_validate(message.content)

@@ -3,7 +3,7 @@ Data Model
 
 
 
-.. autopydantic_model:: tdemocracy.model.LSSTReport
+.. autopydantic_model:: tdemocracy.model.NuclearTransientReport
    :model-erdantic-figure: True
    :model-erdantic-figure-collapsed: False
 

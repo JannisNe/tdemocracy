@@ -98,7 +98,7 @@ class TemplateFlux(Feature):
     info: str = template_flux_doc
 
 
-class LSSTReport(BaseModel):
+class NuclearTransientReport(BaseModel):
     """
     Data model for LSST alert reports from Ampel.
     """
