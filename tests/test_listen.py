@@ -32,5 +32,5 @@ def test_manual_listen_to_nuclear_stream():
 
 
 def test_listen_to_nuclear_stream():
-    reports = list(listen_to_nuclear_stream(until_eos=True))
+    reports = list(listen_to_nuclear_stream(until_eos=True, skip_other_versions=True))
     assert len(reports) > 0

@@ -6,6 +6,7 @@ from hop import Stream
 from hop.auth import Auth
 from hop.io import StartPosition
 
+from tdemocracy import __version__ as tdemocracy_version
 from tdemocracy.model import NuclearTransientReport
 from tdemocracy.settings import Settings
 
@@ -16,6 +17,7 @@ def listen_to_nuclear_stream(
     start_at: Any = StartPosition.EARLIEST,
     until_eos: bool = False,
     settings: Settings | None = None,
+    skip_other_versions: bool = False,
 ) -> Generator[NuclearTransientReport]:
     """
     Listen to Nuclear stream
@@ -26,7 +28,8 @@ def listen_to_nuclear_stream(
     :type until_eos: bool
     :param settings: Settings to use, if not passed reads the corresponding from the environment or a `.env` file. See :class:`tdemocracy.settings.Settings` for details.
     :type settings: Settings | None
-
+    :param skip_other_versions: Skip alerts with wrong versions (default)
+    :type skip_other_versions: bool
     """
     _settings = settings or Settings()
     auth = Auth(_settings.username, _settings.password)
@@ -36,4 +39,11 @@ def listen_to_nuclear_stream(
         LOGGER.info(f"Listening to {_settings.topic}...")
         for message in s:
             LOGGER.debug("Received message")
+            if ((mv := message.content.get("model_version")) is None) or (mv != tdemocracy_version):
+                if skip_other_versions:
+                    LOGGER.debug(f"Skipping version {mv}")
+                    continue
+                else:
+                    msg = f"Received message with wrong model_version: {mv}, expected: {tdemocracy_version}"
+                    raise ValueError(msg)
             yield NuclearTransientReport.model_validate(message.content)
