@@ -1,5 +1,5 @@
 from collections.abc import Sequence
-from typing import Literal, TypedDict
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
 
@@ -82,7 +82,7 @@ class MeanPosition(BaseModel):
     """Standard deviation of the datapoint distance to the mean position in arcsec"""
 
 
-class TemplateFlux(TypedDict):
+class TemplateFlux(BaseModel):
     """Median and 90th percentile of the templateFlux of all diaSources
     contributing to the diaObject in a single band."""
 
@@ -96,7 +96,7 @@ class TemplateFlux(TypedDict):
     """95th percentile template flux"""
 
 
-class TemplateFluxes(TypedDict):
+class TemplateFluxes(BaseModel):
     """Median of the templateFlux of all diaSources contributing to the diaObject."""
 
     u: TemplateFlux | None
