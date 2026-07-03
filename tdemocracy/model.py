@@ -114,6 +114,8 @@ class NuclearTransientReport(BaseModel):
 
     version: str
     """Version of the TDEmocracy nuclear filter"""
+    model_version: str
+    """Version of the TDEmocracy nuclear filter data model"""
     object: Object
     state: int
     """unique identifier for underlying collection of data points in AMPEL"""
