@@ -5,7 +5,7 @@ from hop.auth import Auth
 from hop.io import StartPosition
 
 from tdemocracy.listen import listen_to_nuclear_stream
-from tdemocracy.model import LSSTReport
+from tdemocracy.model import NuclearTransientReport
 from tdemocracy.settings import Settings
 
 LOGGER = logging.getLogger(__name__)
@@ -28,7 +28,7 @@ def test_manual_listen_to_nuclear_stream():
     assert len(messages) > 0
 
     for m in messages[-2:]:
-        assert LSSTReport.model_validate(m.content) is not None
+        assert NuclearTransientReport.model_validate(m.content) is not None
 
 
 def test_listen_to_nuclear_stream():
