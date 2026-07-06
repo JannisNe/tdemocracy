@@ -17,6 +17,28 @@ test: ## Test the code with pytest
 	@echo "🚀 Testing code: Running pytest"
 	@poetry run pytest --cov --cov-config=pyproject.toml --cov-report=xml
 
+BUMP ?= patch
+
+.PHONY: version
+version: ## Bump version (or set VERSION=x.y.z)
+	@if [ "$$(git branch --show-current)" != "main" ]; then \
+		echo "Must be on main"; \
+		exit 1; \
+	fi
+	@echo "🚀 Bumping version"
+	@if [ -n "$(VERSION)" ]; then \
+		poetry version "$(VERSION)"; \
+	else \
+		poetry version "$(BUMP)"; \
+	fi
+	@VERSION=$$(poetry version -s); \
+	echo "__version__ = '$$VERSION'" > tdemocracy/__init__.py; \
+	pre-commit; \
+	git add tdemocracy/__init__.py pyproject.toml; \
+	git commit -m "Bump version to $$VERSION"; \
+	git tag -a "v$$VERSION" -m "Bump version to $$VERSION"
+
+
 .PHONY: build
 build: clean-build ## Build wheel file using poetry
 	@echo "🚀 Creating wheel file"
