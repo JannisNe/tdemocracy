@@ -54,8 +54,14 @@ class Host(BaseModel):
 
     name: str | None
     """Name of the identifying ampel unit"""
-    source: str | list[str]
-    """Names of the catalogs containing this host"""
+    primary_source: str
+    """Name of the catalog with the closest entry"""
+    ra: float
+    """Right ascension (deg)"""
+    dec: float
+    """Declination (deg)"""
+    sources: str | list[str]
+    """Names of catalogs with entries close to the one in primary_source"""
     redshift: float | None
     """Mean of the best redshift category for all catalog sources containing redshifts (see https://github.com/AmpelAstro/Ampel-HU-astro/blob/main/ampel/contrib/hu/t2/T2DigestRedshifts.py)"""
     redshift_error: float | None = None
