@@ -32,8 +32,7 @@ version: ## Bump version (or set VERSION=x.y.z)
 		poetry version "$(BUMP)"; \
 	fi
 	@VERSION=$$(poetry version -s); \
-	echo "__version__ = '$$VERSION'" > tdemocracy/__init__.py; \
-	pre-commit; \
+	echo "__version__ = \"$$VERSION\"" > tdemocracy/__init__.py; \
 	git add tdemocracy/__init__.py pyproject.toml; \
 	git commit -m "Bump version to $$VERSION"; \
 	git tag -a "v$$VERSION" -m "Bump version to $$VERSION"
