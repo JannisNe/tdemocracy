@@ -13,7 +13,11 @@ You need an account at the `SCIMMA Hopskotch service`_. Please contact the TDEmo
 Installation
 ------------
 
-Clone the repository::
+You can easily install the package via ``pip``::
+
+   pip install tdemocracy
+
+If you want to modify the code to make contributions, clone the repository::
 
 
    git clone https://github.com/JannisNe/tdemocracy.git
@@ -25,10 +29,6 @@ Create a new python environment with your favourite environment manager (``pytho
 
 .. _poetry: https://python-poetry.org/
 
-
-In the future, you will be able to install the package via ``pip``::
-
-   pip install tdemocracy
 
 
 Getting started

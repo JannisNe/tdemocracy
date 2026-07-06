@@ -15,18 +15,18 @@ You need an account at the [SCIMMA Hopskotch service](https://scimma.org/hopskot
 
 ## Installation
 
-Pull the repository and install the dependencies with [`poetry`](https://python-poetry.org/):
+You can easily install the package via `pip`:
+
+```bash
+pip install tdemocracy
+```
+
+If you want the source editable code to make contributions pull the repository and install the dependencies with [`poetry`](https://python-poetry.org/):
 
 ```bash
 git clone https://github.com/JannisNe/tdemocracy.git
 cd tdemocracy
 poetry install
-```
-
-In the future, you will be able to install the package via `pip`:
-
-```bash
-pip install tdemocracy
 ```
 
 ## Usage:
