@@ -1,6 +1,6 @@
 [project]
 name = "tdemocracy"
-version = "0.0.1"
+version = "0.0.2"
 description = "Listen to nuclear alerts from the Vera Rubin Observatory for the TDEmocracy project"
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
