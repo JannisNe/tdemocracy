@@ -62,7 +62,7 @@ class Host(BaseModel):
     """Precision of the redshift category"""
     distance: float
     """Distance in arcsec"""
-    info: str | dict[str, dict[str, str]] | None = None
+    info: str | dict[str, dict[str, str | int]] | None = None
     """Type info if included in the matching catalogs, catalog name -> type key -> type value"""
 
 
