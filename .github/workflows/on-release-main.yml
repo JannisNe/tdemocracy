@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
@@ -19,10 +19,31 @@ jobs:
         id: vars
         run: echo tag=${GITHUB_REF#refs/*/} >> $GITHUB_OUTPUT
 
-      - name: Build and publish
-        run: |
-          source .venv/bin/activate
-          poetry version $RELEASE_VERSION
-          make build-and-publish
-        env:
-          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+      - name: build
+        run: poetry build
+
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v5
+        with:
+          name: python-package-distributions
+          path: dist/
+  publish:
+    name: >-
+      Publish Python 🐍 distribution 📦 to PyPI
+    if: startsWith(github.ref, 'refs/tags/') # only publish to PyPI on tag pushes
+    needs:
+      - build
+    environment:
+      name: pypi
+      url: https://pypi.org/p/tdemocracy
+    permissions:
+      id-token: write # IMPORTANT: mandatory for trusted publishing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v6
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
