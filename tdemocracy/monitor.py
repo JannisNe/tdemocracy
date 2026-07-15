@@ -100,7 +100,7 @@ class KafkaMetricsMonitor:
 if __name__ == "__main__":
     import sys
 
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.DEBUG)
     monitor = KafkaMetricsMonitor()
     try:
         monitor.run_monitor()
