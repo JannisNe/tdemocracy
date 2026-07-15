@@ -19,24 +19,26 @@ LOGGER = logging.getLogger(__name__)
 # Prometheus metrics
 alerts_count = Counter("nuclear_alerts_total", "Total nuclear alert reports received")
 alerts_rate_per_hour = Gauge("nuclear_alerts_rate_per_hour", "Number of alerts in the last hour")
-photometry_median_flux = Gauge(
-    "nuclear_photometry_median_flux_latest", "Median flux of latest photometry point per hour"
+median_latest_detections = Gauge(
+    "nuclear_photometry_latest_detection", "Median time of latest photometry point per hour"
 )
 
 
 class KafkaMetricsMonitor:
     """Monitor Kafka alert stream and track metrics."""
 
-    def __init__(self, settings: Settings | None = None, metrics_port: int = 8000):
+    def __init__(self, settings: Settings | None = None, metrics_port: int = 8000, window_hours: float = 1.0):
         """
         Initialize monitor.
 
         :param settings: Settings to use for stream connection
         :param metrics_port: Port for Prometheus metrics endpoint
+        :param window_hours: Time window in hours for rolling statistics
         """
         self._settings = settings or Settings()
         self._metrics_port = metrics_port
-        # ponytail: rolling window of (timestamp, flux) tuples, 1-hour retention
+        self._window_hours = window_hours
+        # ponytail: rolling window of (timestamp, times) tuples
         self._hourly_window: deque[tuple[datetime, list[float]]] = deque()
         self._lock = Lock()
 
@@ -51,21 +53,21 @@ class KafkaMetricsMonitor:
 
         if alert.photometry:
             latest_photometry = alert.photometry[-1]
-            flux = latest_photometry.flux
+            time = latest_photometry.time
 
             with self._lock:
                 now = datetime.now(UTC)
-                self._hourly_window.append((now, [flux]))
+                self._hourly_window.append((now, [time]))
 
-                cutoff = now - timedelta(hours=1)
+                cutoff = now - timedelta(hours=self._window_hours)
                 while self._hourly_window and self._hourly_window[0][0] < cutoff:
                     self._hourly_window.popleft()
 
                 if self._hourly_window:
-                    all_fluxes = [f for _, fluxes in self._hourly_window for f in fluxes]
+                    all_times = [t for _, times in self._hourly_window for t in times]
                     alerts_rate_per_hour.set(len(self._hourly_window))
-                    if all_fluxes:
-                        photometry_median_flux.set(median(all_fluxes))
+                    if all_times:
+                        median_latest_detections.set(median(all_times))
 
     def run_monitor(
         self,
