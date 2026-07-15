@@ -30,5 +30,5 @@ runs:
       shell: bash
 
     - name: Install dependencies
-      run: poetry install --no-interaction -E dev
+      run: poetry install --no-interaction -E dev -E monitor
       shell: bash
