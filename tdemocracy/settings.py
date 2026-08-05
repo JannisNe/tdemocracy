@@ -1,5 +1,6 @@
 from typing import Any
 
+from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -8,7 +9,7 @@ class Settings(BaseSettings):
 
     username: str
     """Username for the Hopskotch stream"""
-    password: str
+    password: SecretStr
     """Password for the Hopskotch stream"""
     topic: str = "Ampel-TDEmocracy.nucelar-stream-dev"
     """Hopskotch topic"""
