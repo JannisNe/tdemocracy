@@ -2,7 +2,6 @@ import logging
 from collections.abc import Generator
 from typing import Any
 
-import numpy as np
 from hop import Stream
 from hop.auth import Auth
 from hop.io import StartPosition
@@ -47,8 +46,8 @@ def listen_to_nuclear_stream(
 
             elif mv_str in {"0.0.4", "0.0.3", "0.0.2", "0.0.1"}:
                 # backwards compatibility for older model version
-                content["host"]["ra"] = np.nan
-                content["host"]["dec"] = np.nan
+                content["host"]["ra"] = float("nan")
+                content["host"]["dec"] = float("nan")
                 content["host"]["sources"] = content["host"]["source"]
                 content["host"]["primary_source"] = content["host"]["source"][0]
                 yield NuclearTransientReport.model_validate(content)
