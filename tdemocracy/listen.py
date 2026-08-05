@@ -21,7 +21,7 @@ def listen_to_nuclear_stream(
     settings: Settings | None = None,
 ) -> Generator[NuclearTransientReport]:
     """
-    Listen to Nuclear stream
+    Listen to Nuclear stream, converts older data model versions to current format if possible.
 
     :param start_at: where to start the stream, either of StartPosition.EARLIEST or StartPosition.LATEST
     :type start_at: Any
