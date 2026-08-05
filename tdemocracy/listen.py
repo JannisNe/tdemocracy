@@ -40,7 +40,7 @@ def listen_to_nuclear_stream(
         for message in s:
             LOGGER.debug("Received message")
             content = message.content
-            mv_str = content["version"]
+            mv_str = content["model_version"]
 
             if mv_str in {"0.0.6", "0.0.5"}:
                 yield NuclearTransientReport.model_validate(content)
