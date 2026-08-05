@@ -32,7 +32,7 @@ def listen_to_nuclear_stream(
     :type skip_other_versions: bool
     """
     _settings = settings or Settings()
-    auth = Auth(_settings.username, _settings.password)
+    auth = Auth(_settings.username, _settings.password.get_secret_value())
     stream = Stream(auth=auth, start_at=start_at, until_eos=until_eos)
 
     with stream.open(f"kafka://kafka.scimma.org/{_settings.topic}", mode="r", group_id=_settings.group_id) as s:

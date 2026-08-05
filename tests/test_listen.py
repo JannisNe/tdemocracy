@@ -14,7 +14,7 @@ LOGGER = logging.getLogger(__name__)
 def test_manual_listen_to_nuclear_stream():
     logging.basicConfig(level=logging.DEBUG)
     _settings = Settings()
-    auth = Auth(_settings.username, _settings.password)
+    auth = Auth(_settings.username, _settings.password.get_secret_value())
     stream = Stream(auth=auth, start_at=StartPosition.EARLIEST, until_eos=True)
 
     messages = []
