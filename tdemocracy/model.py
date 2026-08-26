@@ -86,6 +86,8 @@ class MeanPosition(BaseModel):
     """Geometric mean of sqrt(raErr^2 + decErr^2) in arcsec"""
     std: float
     """Standard deviation of the datapoint distance to the mean position in arcsec"""
+    n_sources: int
+    """Number of contributing diaSources"""
 
 
 class TemplateFlux(BaseModel):
