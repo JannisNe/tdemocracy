@@ -41,7 +41,10 @@ def listen_to_nuclear_stream(
             content = message.content
             mv_str = content["model_version"]
 
-            if mv_str in {"0.0.7", "0.0.6", "0.0.5"}:
+            if mv_str in {"0.0.8"}:
+                yield NuclearTransientReport.model_validate(content)
+
+            elif mv_str in {"0.0.7", "0.0.6", "0.0.5"}:
                 content["mean_position"]["n_sources"] = -1
                 yield NuclearTransientReport.model_validate(content)
 
