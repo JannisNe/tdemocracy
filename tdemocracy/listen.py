@@ -42,10 +42,12 @@ def listen_to_nuclear_stream(
             mv_str = content["model_version"]
 
             if mv_str in {"0.0.7", "0.0.6", "0.0.5"}:
+                content["mean_position"]["n_sources"] = -1
                 yield NuclearTransientReport.model_validate(content)
 
             elif mv_str in {"0.0.4", "0.0.3", "0.0.2", "0.0.1"}:
                 # backwards compatibility for older model version
+                content["mean_position"]["n_sources"] = -1
                 content["host"]["ra"] = float("nan")
                 content["host"]["dec"] = float("nan")
                 content["host"]["sources"] = content["host"]["source"]
